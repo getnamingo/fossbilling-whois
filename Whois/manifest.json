@@ -1,0 +1,12 @@
+{
+  "id": "whois",
+  "type": "mod",
+  "name": "WHOIS & RDAP Client",
+  "description": "Provides WHOIS and RDAP query capabilities to retrieve domain registration details and status information",
+  "icon_url": "icon.svg",
+  "homepage_url": "https://namingo.org",
+  "author": "Namingo Team",
+  "author_url": "https://namingo.org/",
+  "license": "Apache 2.0 - https://www.apache.org/licenses/LICENSE-2.0",
+  "version": "0.9.0"
+}
