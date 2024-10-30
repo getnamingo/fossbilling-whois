@@ -39,6 +39,7 @@
                 <div class="row" id="bottom">
                   <div class="col-lg-12">
                     <pre><code><div id="result"></div></code></pre>
+                    <p id="contact"></p>
                   </div>
                 </div>
             </section>
@@ -48,6 +49,13 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Function to update the contact link
+            function updateContactLink(domain) {
+                var contactElement = document.getElementById("contact");
+                var contactLink = '/contact?domain=' + encodeURIComponent(domain);
+                contactElement.innerHTML = '<a href="' + contactLink + '">Contact the domain registrant</a>';
+            }
+
             document.getElementById('domainInput').addEventListener('keypress', function(event) {
                 // Check if the key pressed is 'Enter'
                 if (event.key === 'Enter') {
@@ -60,6 +68,8 @@
             });
 
             document.getElementById('whoisButton').addEventListener('click', function() {
+                document.getElementById("contact").innerHTML = ''; // Clear the contact link
+
                 var domain = document.getElementById('domainInput').value;
                 var captcha = '';
                 
@@ -73,6 +83,10 @@
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('result').innerText = data;
+                    const rowCount = data.split('\n').length;
+                    if (rowCount >= 5) {
+                        updateContactLink(domain);
+                    }
                     document.getElementById('bottom').style.display = 'block';
                     // Reload captcha after a successful response
                     //document.getElementById('captchaImg').src = 'captcha.php?' + Math.random();
@@ -81,6 +95,8 @@
             });
             
             document.getElementById('rdapButton').addEventListener('click', function() {
+                document.getElementById("contact").innerHTML = ''; // Clear the contact link
+
                 var domain = document.getElementById('domainInput').value;
                 var captcha = '';
 
@@ -100,6 +116,9 @@
                         // Parse and display RDAP data
                         let output = parseRdapResponse(data);
                         document.getElementById('result').innerText = output;
+                        if (!output.includes("Domain Name: N/A")) {
+                            updateContactLink(domain);
+                        }
                         document.getElementById('bottom').style.display = 'block';
                         // Reload captcha
                         //document.getElementById('captchaImg').src = 'captcha.php?' + Math.random();
