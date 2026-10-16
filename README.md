@@ -1,4 +1,8 @@
 # WHOIS & RDAP Client
+
+> [!WARNING]
+> **Deprecated:** This module is no longer maintained separately. Please migrate to [Namingo Registrar for FOSSBilling](https://github.com/getnamingo/fossbilling-namingo-registrar) for future updates.
+
 Provides WHOIS and RDAP query capabilities to retrieve domain registration details and status information
 
 ## Installation
